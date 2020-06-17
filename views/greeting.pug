@@ -14,7 +14,7 @@ block content
   .greeting-body= greeting.body
   i= greeting.date
   br
-  if greeting.rec==user.name
+  if greeting.rec==user.name && greeting.status==null
     form(action="/greetings/"+`${greeting._id}`, method="POST")
       input#accept(type='radio', name='status', value='accept')
       label(for='accept') Accept
@@ -25,7 +25,12 @@ block content
       input(type='submit', value='Send')
   else
     if greeting.status!=null
-      h5= greeting.status
+      b= greeting.status
+      i  by 
+      if greeting.rec==user.name
+        b you
+      else
+        b= greeting.rec
     else
       h5 no reply....
 
