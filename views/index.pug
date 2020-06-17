@@ -1,0 +1,15 @@
+extends layout
+
+
+block content
+   h1 #{title}
+   if user
+    ul.list-group
+      each greeting, i in greetings
+        if greeting.rec==user.name
+          li.list-group-item
+            a(href="/greetings/"+ greeting._id)= greeting.title
+        else if greeting.author==user.id
+          li.list-group-item
+            a(href="/greetings/"+ greeting._id)= greeting.title
+            p -sent by you

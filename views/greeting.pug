@@ -1,0 +1,36 @@
+extends layout
+
+
+block content
+  .img-profile
+    img(src=`https://robohash.org/${greeting.author}?size=100x100`, alt="profile-pic") 
+  h1= greeting.title
+  span sent by 
+  if greeting.rec==user.name
+    b= author
+  else
+    b you  
+  br
+  .greeting-body= greeting.body
+  i= greeting.date
+  br
+  if greeting.rec==user.name
+    form(action="/greetings/"+`${greeting._id}`, method="POST")
+      input#accept(type='radio', name='status', value='accept')
+      label(for='accept') Accept
+      br
+      input#decline(type='radio', name='status', value='decline')
+      label(for='decline') Decline
+      br
+      input(type='submit', value='Send')
+  else
+    if greeting.status!=null
+      h5= greeting.status
+    else
+      h5 no reply....
+
+
+
+
+
+
